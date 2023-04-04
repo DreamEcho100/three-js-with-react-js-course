@@ -43,7 +43,12 @@ const App = () => {
 	return (
 		<div>
 			<h1 className='text-3xl font-bold underline'>Hello Three JS world!</h1>
-			<Canvas ref={canvasRef} className='bg-black' dpr={[1, 2]}>
+			<Canvas
+				ref={canvasRef}
+				className='bg-black'
+				dpr={[1, 2]}
+				style={{ width: '100%', height: '100vh' }}
+			>
 				<OrbitControls />
 				<Stats />
 				<ambientLight intensity={0.5} />
@@ -55,6 +60,9 @@ const App = () => {
 				<Box
 					position={[2.2, 0, 0]}
 					geometryProps={{ args: [2, 2, 2] }}
+					meshStandardMaterialProps={{
+						color: boxesConfig.box1.isHovered ? 'red' : 'orange'
+					}}
 					scale={boxesConfig.box1.isHovered ? 2 : 1}
 					onPointerEnter={() =>
 						setBoxesConfig((prev) => ({
@@ -72,6 +80,9 @@ const App = () => {
 				<Box
 					position={[-2.2, 0, 0]}
 					geometryProps={{ args: [2, 2, 2] }}
+					meshStandardMaterialProps={{
+						color: boxesConfig.box2.isHovered ? 'red' : 'orange'
+					}}
 					scale={boxesConfig.box2.isHovered ? 2 : 1}
 					onPointerEnter={() =>
 						setBoxesConfig((prev) => ({
