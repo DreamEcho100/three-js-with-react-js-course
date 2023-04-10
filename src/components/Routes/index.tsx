@@ -1,8 +1,9 @@
 import FirstProject from '~/components/screens/FirstProject';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
 
 import { useRouteError } from 'react-router-dom';
 import RuloxScreen from '../screens/Rulox';
+import SkyBoxScreen from '../screens/Skybox';
 
 function ErrorPage() {
 	const error = useRouteError() as {
@@ -22,8 +23,20 @@ function ErrorPage() {
 	);
 }
 
-const router = createBrowserRouter([
-	{ path: '/', element: <FirstProject />, errorElement: <ErrorPage /> },
+const HomePage = () => {
+	return (
+		<ul>
+			{browserRoutes.map((route) => (
+				<li key={route.path}>
+					<Link to={route.path}>{route.path}</Link>
+				</li>
+			))}
+		</ul>
+	);
+};
+
+const browserRoutes = [
+	{ path: '/', element: <HomePage />, errorElement: <ErrorPage /> },
 	{
 		path: '/first-project',
 		element: <FirstProject />,
@@ -33,7 +46,14 @@ const router = createBrowserRouter([
 		path: '/rulox',
 		element: <RuloxScreen />,
 		errorElement: <ErrorPage />
+	},
+	{
+		path: '/sky-box',
+		element: <SkyBoxScreen />,
+		errorElement: <ErrorPage />
 	}
-]);
+];
+
+const router = createBrowserRouter(browserRoutes);
 
 export default router;
